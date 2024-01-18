@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">BBTVAssignments</string>
+
+    <!-- Drama -->
+    <string name="recommend">ละครแนะนำ</string>
+    <string name="hot_hit">10 อันดับละครดัง กำลังมาแรง</string>
+    <string name="actor">นักแสดง</string>
+
+    <!-- Drama Detail -->
+    <string name="synopsis">เรื่องย่อ</string>
+    <string name="all_episode">เลือกตอน</string>
+
+    <!-- Error -->
+    <string name="fetch_drama_data_error">Fetch Drama Data Error</string>
+    <string name="fetch_drama_detail_data_error">Fetch Drama Detail Data Error</string>
 </resources>

@@ -1,9 +1,12 @@
 package com.example.bbtvassignments.repository
 
-import com.example.bbtvassignments.RetrofitService
+import com.example.bbtvassignments.service.RetrofitService
+import javax.inject.Inject
 
-class MainRepository constructor(private val retrofitService: RetrofitService) {
-    fun getDrama() = retrofitService.getAllDrama();
-    fun getDramaDetail() = retrofitService.getDramaDetail();
+class MainRepository (
+    private val retrofitService: RetrofitService
+) {
+    suspend fun getAllDrama() = retrofitService.getAllDrama()
+    suspend fun getDramaDetail(long: Long) = retrofitService.getDramaDetail(long);
 
 }

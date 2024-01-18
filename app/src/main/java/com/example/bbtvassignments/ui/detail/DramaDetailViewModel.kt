@@ -1,8 +1,8 @@
 package com.example.bbtvassignments.ui.detail
 
-import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModel
+import com.example.bbtvassignments.repository.MainRepository
 
-@Composable
-fun Drama() {
+class DramaDetailViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
 }
