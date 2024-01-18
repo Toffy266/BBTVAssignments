@@ -25,7 +25,10 @@ fun DramaDetail(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TextComponent(title: String, modifier: Modifier = Modifier) {
+fun TextComponent(
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = title,
         modifier
@@ -34,7 +37,11 @@ fun TextComponent(title: String, modifier: Modifier = Modifier) {
     )
 }
 @Composable
-fun TypeComponent(imageUrl: String, title: String, type: String) {
+fun TypeComponent(
+    imageUrl: String,
+    title: String,
+    type: String
+) {
     Column {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -55,7 +62,10 @@ fun TypeComponent(imageUrl: String, title: String, type: String) {
 }
 
 @Composable
-fun SynopsisComponent(synopsis: String, modifier: Modifier = Modifier) {
+fun SynopsisComponent(
+    synopsis: String,
+    modifier: Modifier = Modifier
+) {
     Column {
         TextComponent(stringResource(id = R.string.synopsis))
         TextComponent(synopsis)
@@ -63,7 +73,11 @@ fun SynopsisComponent(synopsis: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ActorComponent(imageUrl: String, actor: String, modifier: Modifier = Modifier) {
+fun ActorComponent(
+    imageUrl: String,
+    actor: String,
+    modifier: Modifier = Modifier
+) {
     Box(modifier.fillMaxWidth()) {
         TextComponent(title = actor)
         AsyncImage(
@@ -78,7 +92,12 @@ fun ActorComponent(imageUrl: String, actor: String, modifier: Modifier = Modifie
 }
 
 @Composable
-fun EpisodeComponent(imageUrl: String, title: String, detail: String, modifier: Modifier = Modifier) {
+fun EpisodeComponent(
+    imageUrl: String,
+    title: String,
+    detail: String,
+    modifier: Modifier = Modifier
+) {
     Row {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -103,9 +122,9 @@ fun TextComponentPreView() {
 @Composable
 fun TypeComponentPreview() {
     TypeComponent(
-        "https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879z",
-        stringResource(id = R.string.title),
-        stringResource(id = R.string.type)
+        imageUrl = "test",
+        title = stringResource(id = R.string.title),
+        type = stringResource(id = R.string.type)
     )
 }
 
@@ -119,10 +138,8 @@ fun SynopsisComponentPreview() {
 @Composable
 fun ActorComponentPreview() {
     ActorComponent(
-        "https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg",
-        stringResource(
-            id = R.string.actor
-        )
+        imageUrl = "test",
+        actor =  stringResource(id = R.string.actor)
     )
 }
 
@@ -130,8 +147,8 @@ fun ActorComponentPreview() {
 @Composable
 fun EpisodeComponentPreview() {
     EpisodeComponent(
-        "https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg",
-        stringResource(id = R.string.episode),
-        stringResource(id = R.string.detail)
+        imageUrl = "test",
+        title = stringResource(id = R.string.episode),
+        detail = stringResource(id = R.string.detail)
     )
 }

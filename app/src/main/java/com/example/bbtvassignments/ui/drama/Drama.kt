@@ -31,17 +31,23 @@ import coil.request.ImageRequest
 import com.example.bbtvassignments.R
 
 @Composable
-fun Drama(navController: NavController, modifier: Modifier = Modifier) {
+fun Drama(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val viewModel: DramaViewModel = viewModel()
     val dramaData by viewModel.dramaData.observeAsState()
 
-    Column(modifier.fillMaxSize()) {
-
-    }
+//    Column(modifier.fillMaxSize()) {
+//
+//    }
 }
 
 @Composable
-fun TextComponent(title: String, modifier: Modifier = Modifier) {
+fun TextComponent(
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = title,
         modifier
@@ -51,7 +57,11 @@ fun TextComponent(title: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BannerComponent(imageUrl: String, title: String, modifier: Modifier = Modifier) {
+fun BannerComponent(
+    imageUrl: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Box (modifier.fillMaxWidth()) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -67,7 +77,11 @@ fun BannerComponent(imageUrl: String, title: String, modifier: Modifier = Modifi
 }
 
 @Composable
-fun RecommendComponent(imageUrl: String, title: String, modifier: Modifier = Modifier) {
+fun RecommendComponent(
+    imageUrl: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Box(modifier.fillMaxWidth()) {
         TextComponent(title = title)
         AsyncImage(
@@ -84,7 +98,11 @@ fun RecommendComponent(imageUrl: String, title: String, modifier: Modifier = Mod
 }
 
 @Composable
-fun Top10Component(imageUrl: String, title: String, modifier: Modifier = Modifier) {
+fun Top10Component(
+    imageUrl: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
     Box(modifier.aspectRatio(16f / 9f)) {
         TextComponent(title = title)
         AsyncImage(
@@ -98,7 +116,11 @@ fun Top10Component(imageUrl: String, title: String, modifier: Modifier = Modifie
 }
 
 @Composable
-fun ActorComponent(imageUrl: String, actor: String, modifier: Modifier = Modifier) {
+fun ActorComponent(
+    imageUrl: String,
+    actor: String,
+    modifier: Modifier = Modifier
+) {
     Box(modifier.fillMaxWidth()) {
         TextComponent(title = actor)
         AsyncImage(
@@ -116,36 +138,44 @@ fun ActorComponent(imageUrl: String, actor: String, modifier: Modifier = Modifie
 @Preview(showBackground = true)
 @Composable
 fun TextComponentPreview() {
-    TextComponent(title = stringResource(id = R.string.title))
+    TextComponent(
+        title = stringResource(id = R.string.title)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun BannerComponentPreview() {
-    BannerComponent(imageUrl = "https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg", title = stringResource(R.string.title))
+    BannerComponent(
+        imageUrl = "test",
+        title = stringResource(R.string.title)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun RecommendComponentPreview() {
-    RecommendComponent(imageUrl = "https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg", title = stringResource(
-        id = R.string.recommend
-    ))
+    RecommendComponent(
+        imageUrl = "test",
+        title = stringResource(id = R.string.recommend)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun Top10ComponentPreview() {
-    Top10Component("https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg", stringResource(
-        id = R.string.top10
-    ))
+    Top10Component(
+        imageUrl = "test",
+        title = stringResource(id = R.string.top10)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ActorComponentPreview() {
-    ActorComponent("https://ott-picture.bugaboo.tv/b09f3a87-b821-41d5-8984-9b81af9885427136364879589484783-l.jpeg", stringResource(
-        id = R.string.actor
-    ))
+    ActorComponent(
+        imageUrl = "test",
+        actor = stringResource(id = R.string.actor)
+    )
 }
 
