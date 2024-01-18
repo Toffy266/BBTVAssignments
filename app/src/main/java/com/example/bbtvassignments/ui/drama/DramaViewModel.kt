@@ -12,15 +12,13 @@ import timber.log.Timber
 class DramaViewModel(
     private val mainRepository: MainRepository
 ) : ViewModel() {
+    private val _dramas = MutableLiveData<DramaModel>()
+    val dramaData: LiveData<DramaModel> = _dramas
 
-    private val _dramaData = MutableLiveData<DramaModel>()
-    val dramaData: LiveData<DramaModel> = _dramaData
-
-    fun fetchDramaData() {
+    init {
         viewModelScope.launch {
             try {
-                val dramas = mainRepository.getAllDrama()
-                _dramaData.value = dramas
+                _dramas.value = mainRepository.repoDrama()
             } catch (e: Exception) {
                 Timber.d(e.message.toString())
             }

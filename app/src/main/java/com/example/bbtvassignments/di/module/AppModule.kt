@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    single { RetrofitService }
+    single { RetrofitService.getInstance() }
     single { MainRepository(get()) }
     viewModel { DramaViewModel(get()) }
     viewModel { DramaDetailViewModel(get()) }

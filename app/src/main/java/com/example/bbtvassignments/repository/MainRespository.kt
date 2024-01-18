@@ -6,7 +6,6 @@ import javax.inject.Inject
 class MainRepository (
     private val retrofitService: RetrofitService
 ) {
-    suspend fun getAllDrama() = retrofitService.getAllDrama()
-    suspend fun getDramaDetail(long: Long) = retrofitService.getDramaDetail(long);
-
+    suspend fun repoDrama() = retrofitService.getAllDrama()
+    suspend fun repoDramaDetail() = retrofitService.getDramaDetail()
 }

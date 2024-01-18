@@ -10,10 +10,10 @@ import retrofit2.http.Path
 
 interface RetrofitService {
     @GET("89fece46-6107-4c0d-a31d-6e44dd8bbb14")
-    suspend  fun getAllDrama(): DramaModel
+    suspend fun getAllDrama(): DramaModel
 
     @GET("b9920552-3626-4cbe-a6d9-c43c757933df")
-    suspend fun getDramaDetail( @Path("id") long: Long): DramaDetailModel
+    suspend fun getDramaDetail(): DramaDetailModel
 
     companion object {
         private const val BaseURL = "https://run.mocky.io/v3/"
