@@ -18,6 +18,7 @@ class DramaViewModel(
     init {
         viewModelScope.launch {
             try {
+                val response = mainRepository.repoDrama()
                 _dramas.value = mainRepository.repoDrama()
             } catch (e: Exception) {
                 Timber.d(e.message.toString())

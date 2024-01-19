@@ -90,10 +90,7 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-android:3.5.3")
-//    implementation("io.insert-koin:koin-android-scope:3.1.2")
-//    implementation("io.insert-koin:koin-androidx-scope:3.1.2")
-//    implementation("io.insert-koin:koin-android-viewmodel:3.1.2")
-//    implementation("io.insert-koin:koin-androidx-viewmodel:3.1.2")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
 
     // Timber
     implementation("com.jakewharton.timber:timber:4.7.1")
