@@ -3,6 +3,7 @@ package com.example.bbtvassignments.ui.drama
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,7 +47,6 @@ fun Drama(
     modifier: Modifier = Modifier
 ) {
     val viewModel: DramaViewModel = koinViewModel()
-
     with(viewModel.drama.data) {
         Column(
             modifier
@@ -114,12 +114,16 @@ fun RecommendComponent(
     id: Long,
     imageUrl: String,
     tag: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController = NavController(LocalContext.current),
 ) {
     Box(
         modifier
             .aspectRatio(2f / 3f)
             .padding(8.dp)
+            .clickable(onClick = {
+                navController.navigate("drama_detail")
+            })
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -185,7 +189,7 @@ fun ActorComponent(
     actor: String,
     modifier: Modifier = Modifier
 ) {
-    Column (){
+    Column {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)

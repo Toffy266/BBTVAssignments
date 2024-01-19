@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.bbtvassignments.ui.detail.DramaDetail
 import com.example.bbtvassignments.ui.drama.Drama
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 
@@ -29,18 +30,24 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = "drama"
+                        startDestination = "drama_detail"
                     ) {
                         composable("drama") {
                             Drama(navController = navController)
                         }
-                        composable(
-                            "drama_detail",
-                            arguments = listOf(navArgument("dramaId") { type = NavType.StringType })
-                        ) {
-                            val dramaId = remember {
-                                it.arguments?.getString("dramaId")
-                            }
+//                        composable(
+//                            "drama_detail",
+//                            arguments = listOf(navArgument("dramaId") { type = NavType.StringType })
+//                        ) {
+//                            val dramaId = remember {
+//                                it.arguments?.getString("dramaId")
+//                            }
+//                        }
+//                        composable("drama_detail/{dramaId}") {
+//                            DramaDetail(navController = navController)
+//                        }
+                        composable("drama_detail") {
+                            DramaDetail(navController = navController)
                         }
                     }
                 }

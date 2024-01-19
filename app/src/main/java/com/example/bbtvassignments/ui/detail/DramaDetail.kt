@@ -1,6 +1,7 @@
 package com.example.bbtvassignments.ui.detail
 
 import android.telecom.Call.Details
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,7 +9,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,29 +26,45 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bbtvassignments.R
+import com.example.bbtvassignments.model.Actors
+import com.example.bbtvassignments.model.Episode
+import com.example.bbtvassignments.model.Info
 import com.example.bbtvassignments.ui.drama.BannerComponent
+import com.example.bbtvassignments.ui.drama.ContentComponent
 import com.example.bbtvassignments.ui.drama.DramaViewModel
 import com.example.bbtvassignments.ui.drama.RecommendComponent
+import com.example.bbtvassignments.ui.drama.Top10Component
+import com.example.bbtvassignments.ui.theme.BackgroundColor
 import com.example.bbtvassignments.ui.theme.TextColor
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DramaDetail(modifier: Modifier = Modifier) {
+fun DramaDetail(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val viewModel: DramaDetailViewModel = koinViewModel()
 
-    Column(
-        modifier
-            .fillMaxSize()
-            .padding(16.dp, 16.dp)
-    ) {
-        Column  {
-
+    with(viewModel.detail) {
+        data.forEach { it ->
+            Column(
+                modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .background(BackgroundColor)
+                    .padding(16.dp)
+            ) {
+                TypeComponent(imageUrl = it.imageURL, title = it.title, type = it.type)
+                SynopsisComponent(synopsis = it.synopsis)
+                ContentRowComponent(actor = it.actors)
+                ContentColumnComponent(episodes = it.episodes)
+            }
         }
     }
-
 }
 
 @Composable
@@ -54,7 +76,7 @@ fun TextComponent(
         text = title,
         modifier
             .fillMaxWidth()
-            .padding(8.dp) ,
+            .padding(8.dp),
         color = TextColor,
         style = MaterialTheme.typography.titleLarge
     )
@@ -67,14 +89,13 @@ fun TypeComponent(
     type: String,
     modifier: Modifier = Modifier
 ) {
-    Row {
+    Row (modifier.fillMaxWidth()) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
                 .crossfade(true)
                 .build(),
             contentDescription = null,
-            modifier.aspectRatio(2f / 3f)
         )
         Column {
             TextComponent(title)
@@ -88,19 +109,19 @@ fun SynopsisComponent(
     synopsis: String,
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column (modifier.fillMaxWidth()) {
         TextComponent(stringResource(id = R.string.synopsis))
         TextComponent(synopsis)
     }
 }
 
 @Composable
-fun ActorImageComponent(
+fun ActorComponent(
     imageUrl: String,
     actor: String,
     modifier: Modifier = Modifier
 ) {
-    Column (){
+    Column (modifier.fillMaxWidth()) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
@@ -120,62 +141,57 @@ fun ActorImageComponent(
 }
 
 @Composable
-fun ActorComponent(
-    imageUrl: String,
-    actor: String,
-    modifier: Modifier = Modifier
-) {
-    Box(modifier.fillMaxWidth()) {
-        TextComponent(title = actor)
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageUrl)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            modifier.clip(CircleShape)
-        )
-    }
-}
-
-@Composable
-fun EpisodeImageComponent(
-    imageUrl: String,
-    title: String,
-    modifier: Modifier = Modifier
-) {
-    Row {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageUrl)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop
-        )
-        TextComponent(title)
-    }
-}
-
-@Composable
 fun EpisodeComponent(
     imageUrl: String,
     title: String,
     detail: String,
     modifier: Modifier = Modifier
 ) {
-    Row {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageUrl)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            modifier.clip(CircleShape)
-        )
-        TextComponent(title)
+    Column (modifier.fillMaxWidth()){
+        Row {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(imageUrl)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                modifier.aspectRatio(16f / 9f),
+                contentScale = ContentScale.Crop
+            )
+            TextComponent(title)
+        }
+        TextComponent(detail)
     }
-    TextComponent(detail)
+}
+
+@Composable
+fun ContentRowComponent(
+    actor: List<Actors>,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier.fillMaxWidth()) {
+        TextComponent(title = stringResource(id = R.string.actor))
+        LazyRow {
+            items(actor) {
+                ActorComponent(imageUrl = it.imageURL, actor = it.actorName)
+            }
+        }
+    }
+}
+
+@Composable
+fun ContentColumnComponent(
+    episodes: List<Episode>,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier.fillMaxWidth()) {
+        TextComponent(title = stringResource(id = R.string.all_episode))
+        LazyColumn {
+            items(episodes) {
+                EpisodeComponent(imageUrl = it.imageURL, title = it.title, detail = it.detail)
+            }
+        }
+    }
 }
 
 @Preview
@@ -194,22 +210,22 @@ fun TypeComponentPreview() {
     )
 }
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun SynopsisComponentPreview() {
     SynopsisComponent(stringResource(id = R.string.synopsis_preview))
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun ActorComponentPreview() {
-    ActorComponent(
-        imageUrl = "test",
-        actor =  stringResource(id = R.string.actor)
+    com.example.bbtvassignments.ui.drama.ActorComponent(
+        imageUrl = stringResource(id = R.string.image),
+        actor = stringResource(id = R.string.actor)
     )
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun EpisodeComponentPreview() {
     EpisodeComponent(
