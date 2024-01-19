@@ -1,36 +1,55 @@
 package com.example.bbtvassignments.model
 
+import com.google.gson.annotations.SerializedName
+
 data class DramaModel (
-    val status: String,
-    val data: Data
+    @SerializedName("status")
+    val status: String = "",
+    @SerializedName("data")
+    val data: Data = Data()
 )
 
 data class Data (
-    val banner: Banner,
-    val infos: List<Info>
+    @SerializedName("banner")
+    val banner: Banner = Banner(),
+    @SerializedName("infos")
+    val infos: List<Info> = listOf()
 )
 
 data class Banner (
-    val imageURL: String,
-    val title: String
+    @SerializedName("image_url")
+    val imageURL: String = "",
+    @SerializedName("title")
+    val title: String = ""
 )
 
 data class Info (
-    val id: Long,
-    val categoryTitle: String,
-    val dramas: List<Drama>? = null,
-    val actor: List<Actor>? = null
+    @SerializedName("id")
+    val id: Long = 0,
+    @SerializedName("category_title")
+    val categoryTitle: String = "",
+    @SerializedName("dramas")
+    val dramas: List<Drama> = listOf(),
+    @SerializedName("actor")
+    val actor: List<Actor> = listOf()
 )
 
 data class Actor (
-    val id: Long,
-    val imageURL: String,
-    val actorName: String
+    @SerializedName("id")
+    val id: Long = 0,
+    @SerializedName("image_url")
+    val imageURL: String = "",
+    @SerializedName("actor_name")
+    val actorName: String = ""
 )
 
 data class Drama (
-    val id: Long,
-    val imageURL: String,
-    val tag: String? = null,
-    val title: String? = null
+    @SerializedName("id")
+    val id: Long = 0,
+    @SerializedName("image_url")
+    val imageURL: String = "",
+    @SerializedName("tag")
+    val tag: String = "",
+    @SerializedName("title")
+    val title: String = ""
 )

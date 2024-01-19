@@ -12,4 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val BackgroundColor = Color(0xFF17072B)
 val TextColor = Color(0xFFE3DBE8)
-val CardColor = Color(0xFFFFE500)
+val TagColor = Color(0xFFFFE500)

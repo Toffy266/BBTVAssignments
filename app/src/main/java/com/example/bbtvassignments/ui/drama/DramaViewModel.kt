@@ -1,5 +1,9 @@
 package com.example.bbtvassignments.ui.drama
 
+import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,14 +16,17 @@ import timber.log.Timber
 class DramaViewModel(
     private val mainRepository: MainRepository
 ) : ViewModel() {
-    private val _dramas = MutableLiveData<DramaModel>()
-    val dramaData: LiveData<DramaModel> = _dramas
+
+    var drama by mutableStateOf(DramaModel())
+        private set
 
     init {
         viewModelScope.launch {
             try {
-                val response = mainRepository.repoDrama()
-                _dramas.value = mainRepository.repoDrama()
+                val newsItems = mainRepository.repoDrama()
+                if(newsItems.status ==  "success") {
+                    drama = newsItems
+                }
             } catch (e: Exception) {
                 Timber.d(e.message.toString())
             }
