@@ -1,7 +1,6 @@
 package com.example.bbtvassignments.ui
 
 import android.os.Bundle
-import android.view.WindowInsets.Side
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,24 +29,26 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = "drama_detail"
+                        startDestination = "drama"
                     ) {
                         composable("drama") {
                             Drama(navController = navController)
                         }
-//                        composable(
-//                            "drama_detail",
-//                            arguments = listOf(navArgument("dramaId") { type = NavType.StringType })
-//                        ) {
-//                            val dramaId = remember {
-//                                it.arguments?.getString("dramaId")
-//                            }
-//                        }
-//                        composable("drama_detail/{dramaId}") {
-//                            DramaDetail(navController = navController)
-//                        }
-                        composable("drama_detail") {
-                            DramaDetail(navController = navController)
+                        composable(
+                            "drama_detail/{dramaId}",
+                            arguments = listOf(
+                                navArgument("dramaId"
+                                ) {
+                                    type = NavType.LongType
+                                }
+                            )
+                        ) {
+                            val dramaId = remember {
+                                it.arguments?.getLong("dramaId")
+                            }
+                            DramaDetail(
+                                dramaId = dramaId,
+                                navController = navController)
                         }
                     }
                 }

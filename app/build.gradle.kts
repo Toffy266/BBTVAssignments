@@ -103,7 +103,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:0.12.0")
 
     // Lottie
-    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
 
     // Pull to Refresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
