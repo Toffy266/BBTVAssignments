@@ -1,6 +1,7 @@
 package com.example.bbtvassignments.ui.detail
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,7 +60,7 @@ import com.example.bbtvassignments.ui.theme.YellowColor
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun DramaDetail(
     dramaId: Long?,
@@ -102,6 +103,9 @@ fun DramaDetail(
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
+            stickyHeader {
+                Divider(color = LightPurple, thickness = 1.dp)
+            }
             with(viewModel.detail) {
                 data.forEach { it ->
                     if (it.id == dramaId) {
