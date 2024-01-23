@@ -159,11 +159,14 @@ fun Top10DramaComponent(
                         })
                 ) {
                     ImageTop10DramaComponent(imageURL = it.imageURL)
-                    Row (modifier
-                        .align(Alignment.BottomStart),
+                    Row (
+                        modifier.align(Alignment.BottomStart),
+                        verticalAlignment = Alignment.Bottom
                     ) {
                         NumberTop10DramaComponent(id = it.id)
-                        TextTitleTop10DramaComponent(title = it.title)
+                        Box {
+                            TextTitleTop10DramaComponent(title = it.title)
+                        }
                     }
                 }
             }

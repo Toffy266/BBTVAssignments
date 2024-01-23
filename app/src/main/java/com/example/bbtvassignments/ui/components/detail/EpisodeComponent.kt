@@ -170,28 +170,39 @@ fun DetailEpisodeDramaComponent(
     }
 }
 
+// ---------------  EpisodeItem  ---------------
+@Composable
+fun EpisodeItemComponent(
+    episodeItem: Episode,
+    modifier: Modifier = Modifier
+) {
+    with(episodeItem) {
+        Row {
+            ImageEpisodeComponent(imageURL = imageURL)
+            TextTitleEpisodeDramaComponent(title = title)
+        }
+        DetailEpisodeDramaComponent(detail = detail)
+    }
+}
+
 // ---------------  Episode  ---------------
 @Composable
 fun EpisodeComponent(
     episode: List<Episode>,
     modifier: Modifier = Modifier
 ) {
-    with(episode) {
-        Column (
-            modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp)
+    Column (
+        modifier
+            .fillMaxWidth()
+            .background(BackgroundColor)
+            .padding(8.dp)
+    ) {
+        TitleEpisodeDramaComponent()
+        LazyColumn (
+            modifier.padding(top = 8.dp)
         ) {
-            TitleEpisodeDramaComponent()
-            LazyColumn {
-                items(episode) {
-                    Row (modifier.padding(top = 8.dp)) {
-                        ImageEpisodeComponent(imageURL = it.imageURL)
-                        TextTitleEpisodeDramaComponent(title = it.title)
-                    }
-                    DetailEpisodeDramaComponent(detail = it.detail)
-                }
+            items(episode) {
+                EpisodeItemComponent(episodeItem = it)
             }
         }
     }

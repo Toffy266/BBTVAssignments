@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.bbtvassignments.ui.components.util.LoadingComponent
 import com.example.bbtvassignments.ui.components.drama.ActorDramComponentPreview
 import com.example.bbtvassignments.ui.components.drama.ActorDramaComponent
 import com.example.bbtvassignments.ui.components.drama.BannerComponent
@@ -17,6 +18,7 @@ import com.example.bbtvassignments.ui.components.drama.RecommendDramaComponent
 import com.example.bbtvassignments.ui.components.drama.RecommendDramaComponentPreview
 import com.example.bbtvassignments.ui.components.drama.Top10DramaComponent
 import com.example.bbtvassignments.ui.components.drama.Top10DramaComponentPreview
+import com.example.bbtvassignments.ui.components.util.ErrorComponent
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 import org.koin.androidx.compose.koinViewModel
 
@@ -26,28 +28,40 @@ fun Drama(
     modifier: Modifier = Modifier
 ) {
     val viewModel: DramaViewModel = koinViewModel()
-    val allData = viewModel.drama
-    val recommendList = viewModel.recommendList
-    val top10List = viewModel.top10List
-    val actorList = viewModel.actorList
 
-    with(allData.data) {
-        Column (
-            modifier
-                .fillMaxSize()
-                .background(BackgroundColor)
-                .verticalScroll(rememberScrollState())
-        ) {
-            BannerComponent(banner = banner)
-            RecommendDramaComponent(
-                recommendList = recommendList,
-                navController = navController
-            )
-            Top10DramaComponent(
-                top10List = top10List,
-                navController = navController
-            )
-            ActorDramaComponent(actorList = actorList)
+    with(viewModel) {
+        if(loading) {
+            LoadingComponent()
+        } else {
+            if(response) {
+                with(drama.data) {
+                    Column (
+                        modifier
+                            .fillMaxSize()
+                            .background(BackgroundColor)
+                            .verticalScroll(rememberScrollState())
+                    ){
+                        BannerComponent(banner = banner)
+                        RecommendDramaComponent(
+                            recommendList = recommendList,
+                            navController = navController
+                        )
+                        Top10DramaComponent(
+                            top10List = top10List,
+                            navController = navController
+                        )
+                        ActorDramaComponent(actorList = actorList)
+                    }
+                }
+            } else {
+                Column (
+                    modifier
+                        .fillMaxSize()
+                        .background(BackgroundColor)
+                ){
+                    ErrorComponent(error = error.error)
+                }
+            }
         }
     }
 }

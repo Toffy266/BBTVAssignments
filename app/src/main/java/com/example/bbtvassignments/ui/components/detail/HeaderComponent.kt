@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -156,7 +157,11 @@ fun TypeHeaderComponent(
     type: String,
     modifier: Modifier = Modifier
 ) {
-    Row (modifier.padding(8.dp)){
+    Row (
+        modifier
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+        ){
         Text(
             text = stringResource(id = R.string.type),
             modifier.padding(end = 8.dp),

@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
                             }
                             DramaDetail(
                                 dramaId = dramaId,
-                                navController = navController)
+                                navController = navController
+                            )
                         }
                     }
                 }

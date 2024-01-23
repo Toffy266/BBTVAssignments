@@ -12,6 +12,6 @@ val appModule = module {
     single { RetrofitService.getInstance() }
     single<MainRepository> { MainRepositoryImpl(get()) }
     viewModel { DramaViewModel(get()) }
-    viewModel { DramaDetailViewModel(get()) }
+    viewModel { parameters -> DramaDetailViewModel(dramaId = parameters.get(), get()) }
 }
 

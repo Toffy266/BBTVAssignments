@@ -6,10 +6,10 @@ data class ErrorModel (
     @SerializedName("status")
     val status: String = "",
     @SerializedName("error")
-    val error: Error = Error()
+    val error: ErrorDetail = ErrorDetail()
 )
 
-data class Error (
+data class ErrorDetail (
     @SerializedName("code")
     val code: Long = 0,
     @SerializedName("message")
