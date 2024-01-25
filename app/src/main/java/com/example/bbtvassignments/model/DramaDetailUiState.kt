@@ -4,6 +4,7 @@ import androidx.compose.runtime.setValue
 
 data class DramaDetailUiState(
     val loading: Boolean = false,
-    val success: Datas = Datas(),
+    val success: Boolean = false,
     val error: ErrorDetail = ErrorDetail(),
+    val detail: Datas = Datas(),
 )

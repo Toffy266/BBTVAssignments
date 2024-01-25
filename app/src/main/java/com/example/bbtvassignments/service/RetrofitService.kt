@@ -2,7 +2,6 @@ package com.example.bbtvassignments.service
 
 import com.example.bbtvassignments.model.DramaDetailModel
 import com.example.bbtvassignments.model.DramaModel
-import com.example.bbtvassignments.model.ErrorModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

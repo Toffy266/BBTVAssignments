@@ -38,13 +38,14 @@ fun ImageRecommendDramaComponent(
     if (imageURL.isNotEmpty()) {
         NotEmptyImageComponent(
             imageURL = imageURL,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         EmptyImageComponent(
-            painter = painterResource(
-                id = R.drawable.recommend
-            )
+            painter =
+                painterResource(
+                    id = R.drawable.recommend,
+                ),
         )
     }
 }
@@ -57,7 +58,7 @@ fun EpisodeTagRecommendDramaComponent(
     Surface(
         modifier = modifier,
         color = YellowColor,
-        shape = RoundedCornerShape(4.dp)
+        shape = RoundedCornerShape(4.dp),
     ) {
         if (tag.isNotEmpty()) {
             Text(
@@ -76,12 +77,12 @@ fun RecommendDramaItemComponent(
 ) {
     with(drama) {
         Box(
-            modifier = modifier
+            modifier = modifier,
         ) {
             // ---------------  Image  ---------------
             ImageRecommendDramaComponent(
                 imageURL = imageURL,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
             // ---------------  Tag  ---------------
             EpisodeTagRecommendDramaComponent(
@@ -96,7 +97,7 @@ fun RecommendDramaItemComponent(
 @Composable
 fun RecommendDramaComponent(
     recommendList: List<Drama>,
-    onClick: Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -104,19 +105,21 @@ fun RecommendDramaComponent(
     ) {
         // ---------------  Title  ---------------
         TitleComponent(
-            title = stringResource(
-                id = R.string.recommend
-            )
+            title =
+                stringResource(
+                    id = R.string.recommend,
+                ),
         )
         LazyRow {
             items(recommendList) {
                 RecommendDramaItemComponent(
                     drama = it,
-                    modifier = Modifier
-                        .width(160.dp)
-                        .aspectRatio(2f / 3f)
-                        .padding(top = 8.dp, end = 8.dp)
-                        .clickable( onClick = { onClick })
+                    modifier =
+                        Modifier
+                            .width(160.dp)
+                            .aspectRatio(2f / 3f)
+                            .padding(top = 8.dp, end = 8.dp)
+                            .clickable(onClick = onClick),
                 )
             }
         }
@@ -137,11 +140,12 @@ fun RecommendDramaComponentPreview() {
                     Drama(),
                     Drama(),
                 ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp),
-            onClick = Unit
+            onClick = {},
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }

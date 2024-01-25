@@ -20,9 +20,7 @@ import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 
 @Composable
-fun LottieAnimationComponent(
-    modifier: Modifier = Modifier
-) {
+fun LottieAnimationComponent(modifier: Modifier = Modifier) {
     val rawComposition by rememberLottieComposition(
         spec =
             LottieCompositionSpec.RawRes(
@@ -50,9 +48,10 @@ fun LottieAnimationComponent(
 fun LottieAnimationComponentPreview() {
     BBTVAssignmentsTheme {
         LottieAnimationComponent(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BackgroundColor)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(BackgroundColor),
         )
     }
 }

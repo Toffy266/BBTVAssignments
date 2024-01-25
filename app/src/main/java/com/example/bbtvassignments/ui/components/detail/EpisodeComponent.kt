@@ -35,15 +35,15 @@ fun ImageEpisodeComponent(
     if (imageURL.isNotEmpty()) {
         NotEmptyImageComponent(
             imageURL = imageURL,
-            modifier = modifier
-
+            modifier = modifier,
         )
     } else {
         EmptyImageComponent(
-            painter = painterResource(
-                id = R.drawable.episode
-            ),
-            modifier = modifier
+            painter =
+                painterResource(
+                    id = R.drawable.episode,
+                ),
+            modifier = modifier,
         )
     }
 }
@@ -55,9 +55,10 @@ fun TextTitleEpisodeDramaComponent(
 ) {
     var textTitle = title
     if (title.isEmpty()) {
-        textTitle = stringResource(
-            id = R.string.episode_preview
-        )
+        textTitle =
+            stringResource(
+                id = R.string.episode_preview,
+            )
     }
     Text(
         text = textTitle,
@@ -74,9 +75,10 @@ fun DetailEpisodeDramaComponent(
 ) {
     var detailText = detail
     if (detail.isEmpty()) {
-        detailText = stringResource(
-            id = R.string.detail_preview
-        )
+        detailText =
+            stringResource(
+                id = R.string.detail_preview,
+            )
     }
     Text(
         text = detailText,
@@ -94,26 +96,27 @@ fun EpisodeItemComponent(
     modifier: Modifier = Modifier,
 ) {
     with(episodeItem) {
-        Row (
-            modifier = modifier
+        Row(
+            modifier = modifier,
         ) {
             // ---------------  Image  ---------------
             ImageEpisodeComponent(
                 imageURL = imageURL,
-                modifier = Modifier
-                    .width(220.dp)
-                    .aspectRatio(16f / 9f),
+                modifier =
+                    Modifier
+                        .width(220.dp)
+                        .aspectRatio(16f / 9f),
             )
             // ---------------  TextTitle  ---------------
             TextTitleEpisodeDramaComponent(
                 title = title,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
             )
         }
         // ---------------  Detail  ---------------
         DetailEpisodeDramaComponent(
             detail = detail,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = 16.dp),
         )
     }
 }
@@ -124,20 +127,22 @@ fun EpisodeComponent(
     episode: List<Episode>,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier,
+    Column(
+        modifier = modifier,
     ) {
         // ---------------  Title  ---------------
         TitleComponent(
-            title = stringResource(
-                id = R.string.all_episode
-            )
+            title =
+                stringResource(
+                    id = R.string.all_episode,
+                ),
         )
         LazyColumn {
             items(episode) {
                 // ---------------  EpisodeItem  ---------------
                 EpisodeItemComponent(
                     episodeItem = it,
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 8.dp),
                 )
             }
         }
@@ -150,14 +155,16 @@ fun EpisodeComponent(
 fun EpisodeComponentPreview() {
     BBTVAssignmentsTheme {
         EpisodeComponent(
-            episode = listOf(
-                Episode(),
-                Episode()
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp)
+            episode =
+                listOf(
+                    Episode(),
+                    Episode(),
+                ),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }

@@ -38,13 +38,15 @@ fun ImageTop10DramaComponent(
     if (imageURL.isNotEmpty()) {
         NotEmptyImageComponent(
             imageURL = imageURL,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         EmptyImageComponent(
-            painter = painterResource(
-                id = R.drawable.top10),
-            modifier = modifier
+            painter =
+                painterResource(
+                    id = R.drawable.top10,
+                ),
+            modifier = modifier,
         )
     }
 }
@@ -56,13 +58,14 @@ fun TextTitleTop10DramaComponent(
 ) {
     var titleText = title
     if (title.isEmpty()) {
-        titleText = stringResource(
-            id = R.string.title
-        )
+        titleText =
+            stringResource(
+                id = R.string.title,
+            )
     }
     TitleComponent(
         title = titleText,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -85,12 +88,12 @@ fun Top10DramaItemComponent(
 ) {
     with(drama) {
         Box(
-            modifier = modifier
+            modifier = modifier,
         ) {
             // ---------------  Image  ---------------
             ImageTop10DramaComponent(
                 imageURL = imageURL,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
             Row(
                 modifier = Modifier.align(Alignment.BottomStart),
@@ -99,13 +102,14 @@ fun Top10DramaItemComponent(
                 // ---------------  Number  ---------------
                 NumberTop10DramaComponent(
                     id = id,
-                    modifier = Modifier.offset((-3).dp, 22.dp)
+                    modifier = Modifier.offset((-3).dp, 22.dp),
                 )
                 // ---------------  TextTitle  ---------------
                 TextTitleTop10DramaComponent(
                     title = title,
-                    modifier = Modifier
-                        .align(Alignment.Bottom)
+                    modifier =
+                        Modifier
+                            .align(Alignment.Bottom),
                 )
             }
         }
@@ -116,27 +120,29 @@ fun Top10DramaItemComponent(
 @Composable
 fun Top10DramaComponent(
     top10List: List<Drama>,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: Unit
 ) {
     Column(
         modifier = modifier,
     ) {
         // ---------------  Ttle  ---------------
         TitleComponent(
-            title = stringResource(
-                id = R.string.top10
-            )
+            title =
+                stringResource(
+                    id = R.string.top10,
+                ),
         )
         LazyRow {
             items(top10List) {
                 Top10DramaItemComponent(
                     drama = it,
-                    modifier = Modifier
-                        .width(270.dp)
-                        .aspectRatio(5f / 3f)
-                        .padding(top = 8.dp, end = 8.dp)
-                        .clickable(onClick = { onClick })
+                    modifier =
+                        Modifier
+                            .width(270.dp)
+                            .aspectRatio(5f / 3f)
+                            .padding(top = 8.dp, end = 8.dp)
+                            .clickable(onClick = onClick),
                 )
             }
         }
@@ -155,11 +161,12 @@ fun Top10DramaComponentPreview() {
                     Drama(id = 2),
                     Drama(id = 3),
                 ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp),
-            onClick = Unit
+            onClick = {},
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }

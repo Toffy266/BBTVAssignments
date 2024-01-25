@@ -1,7 +1,6 @@
 package com.example.bbtvassignments.ui.components
 
 import androidx.compose.foundation.background
-import com.example.bbtvassignments.ui.components.common.TitleComponent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,6 +25,7 @@ import com.example.bbtvassignments.R
 import com.example.bbtvassignments.model.Actor
 import com.example.bbtvassignments.ui.components.common.EmptyImageComponent
 import com.example.bbtvassignments.ui.components.common.NotEmptyImageComponent
+import com.example.bbtvassignments.ui.components.common.TitleComponent
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 
@@ -37,14 +37,15 @@ fun ImageActorDramaComponent(
     if (imageURL.isNotEmpty()) {
         NotEmptyImageComponent(
             imageURL = imageURL,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         EmptyImageComponent(
-            painter = painterResource(
-                id = R.drawable.actor
-            ),
-            modifier = modifier
+            painter =
+                painterResource(
+                    id = R.drawable.actor,
+                ),
+            modifier = modifier,
         )
     }
 }
@@ -56,9 +57,10 @@ fun TextTitleActorComponent(
 ) {
     var actor = actorName
     if (actorName.isEmpty()) {
-        actor = stringResource(
-            id = R.string.actor_preview
-        )
+        actor =
+            stringResource(
+                id = R.string.actor_preview,
+            )
     }
 
     Text(
@@ -80,9 +82,10 @@ fun ActorComponent(
     Column(modifier = modifier) {
         // ---------------  Title  ---------------
         TitleComponent(
-            title = stringResource(
-                id = R.string.actor
-            )
+            title =
+                stringResource(
+                    id = R.string.actor,
+                ),
         )
         LazyRow {
             items(actorList) {
@@ -92,22 +95,25 @@ fun ActorComponent(
                     // ---------------  Image  ---------------
                     ImageActorDramaComponent(
                         imageURL = it.imageURL,
-                        modifier = Modifier
-                            .size(80.dp)
-                            .clip(CircleShape)
-                            .fillMaxSize()
-                        )
+                        modifier =
+                            Modifier
+                                .size(80.dp)
+                                .clip(CircleShape)
+                                .fillMaxSize(),
+                    )
                     Column(
-                        modifier = Modifier.align(
-                            Alignment.CenterHorizontally
-                        )
+                        modifier =
+                            Modifier.align(
+                                Alignment.CenterHorizontally,
+                            ),
                     ) {
                         // ---------------  TextTitle  ---------------
                         TextTitleActorComponent(
                             actorName = it.actorName,
-                            modifier = Modifier
-                                .width(80.dp)
-                                .padding(0.dp, 8.dp)
+                            modifier =
+                                Modifier
+                                    .width(80.dp)
+                                    .padding(0.dp, 8.dp),
                         )
                     }
                 }
@@ -122,15 +128,17 @@ fun ActorComponent(
 fun ActorDetailComponentPreview() {
     BBTVAssignmentsTheme {
         ActorComponent(
-            actorList = listOf(
-                Actor(),
-                Actor(),
-                Actor(),
-                Actor(),
-            ),
-            modifier = Modifier
-                .background(BackgroundColor)
-                .padding(8.dp)
+            actorList =
+                listOf(
+                    Actor(),
+                    Actor(),
+                    Actor(),
+                    Actor(),
+                ),
+            modifier =
+                Modifier
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }

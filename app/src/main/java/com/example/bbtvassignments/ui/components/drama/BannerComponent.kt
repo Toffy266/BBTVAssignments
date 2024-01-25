@@ -28,18 +28,18 @@ fun ImageBannerComponent(
         if (imageURL.isNotEmpty()) {
             NotEmptyImageComponent(
                 imageURL = imageURL,
-                modifier = modifier
+                modifier = modifier,
             )
         } else {
             EmptyImageComponent(
-                painter = painterResource(
-                    id = R.drawable.banner
-                ),
-                modifier = modifier
+                painter =
+                    painterResource(
+                        id = R.drawable.banner,
+                    ),
+                modifier = modifier,
             )
         }
     }
-
 }
 
 @Composable
@@ -67,14 +67,15 @@ fun BannerComponent(
             // ---------------  Image  ---------------
             ImageBannerComponent(
                 imageURL = banner.imageURL,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
             // ---------------  Text  ---------------
             TextBannerComponent(
                 title = banner.title,
-                modifier = Modifier
-                    .padding(32.dp)
-                    .align(Alignment.BottomCenter)
+                modifier =
+                    Modifier
+                        .padding(32.dp)
+                        .align(Alignment.BottomCenter),
             )
         }
     }
@@ -88,8 +89,9 @@ fun BannerComponentPreview() {
         Banner(
             title = "สามีชั่วคืน",
         ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1f / 1f)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f / 1f),
     )
 }

@@ -59,13 +59,14 @@ fun ErrorComponent(
             Column {
                 ErrorCodeComponent(
                     code = code.toString(),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
                 ErrorMessageComponent(
                     message = message,
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .fillMaxWidth()
+                    modifier =
+                        Modifier
+                            .padding(top = 8.dp)
+                            .fillMaxWidth(),
                 )
             }
         }
@@ -77,13 +78,15 @@ fun ErrorComponent(
 fun ErrorComponentPreview() {
     BBTVAssignmentsTheme {
         ErrorComponent(
-            error = ErrorDetail(
-                500,
-                "Server error!!!",
-            ),
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BackgroundColor)
+            error =
+                ErrorDetail(
+                    500,
+                    "Server error!!!",
+                ),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(BackgroundColor),
         )
     }
 }

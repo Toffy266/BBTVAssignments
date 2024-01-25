@@ -1,6 +1,5 @@
 package com.example.bbtvassignments.ui.drama
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,9 +9,7 @@ import com.example.bbtvassignments.model.Actor
 import com.example.bbtvassignments.model.Drama
 import com.example.bbtvassignments.model.DramaModel
 import com.example.bbtvassignments.model.DramaUiState
-import com.example.bbtvassignments.model.ErrorModel
 import com.example.bbtvassignments.repository.MainRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
@@ -25,39 +22,48 @@ class DramaViewModel(
         private set
 
     fun getDrama() {
+        response =
+            response.copy(
+                loading = true,
+            )
+
         viewModelScope.launch {
-            with(response) {
-                try {
-                    val result = mainRepository.repoDrama()
-                    loading = true
+            try {
+                val result = mainRepository.repoDrama()
+
+                response =
                     if (result.status == "success") {
-                        success = true
-                        data = result.data
-                        recommendList = getRecommendList(result)
-                        top10List = getTop10List(result)
-                        actorList = getActorList(result)
+                        response.copy(
+                            success = true,
+                            data = result.data,
+                            recommendList = getRecommendList(result),
+                            top10List = getTop10List(result),
+                            actorList = getActorList(result),
+                        )
                     } else {
-                        error = result.error.detail
+                        response.copy(
+                            error = result.error,
+                        )
+                    }
+            } catch (throwable: Throwable) {
+                when (throwable) {
+                    is IOException -> {
+                        Timber.d("Network Error")
+                    }
+                    is HttpException -> {
+                        val codeError = throwable.code()
+                        val errorMessageResponse = throwable.message()
+                        Timber.d("Error $errorMessageResponse : $codeError")
+                    }
+                    else -> {
+                        Timber.d(throwable.toString())
                     }
                 }
-                catch (throwable: Throwable) {
-                    when (throwable) {
-                        is IOException -> {
-                            Timber.d("Network Error")
-                        }
-                        is HttpException -> {
-                            val codeError = throwable.code()
-                            val errorMessageResponse = throwable.message()
-                            Timber.d("Error $errorMessageResponse : $codeError")
-                        }
-                        else -> {
-                            Timber.d(throwable.toString())
-                        }
-                    }
-                }
-                finally {
-                    loading = false
-                }
+            } finally {
+                response =
+                    response.copy(
+                        loading = false,
+                    )
             }
         }
     }

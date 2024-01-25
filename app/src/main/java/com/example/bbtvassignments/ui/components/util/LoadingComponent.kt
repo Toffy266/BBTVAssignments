@@ -16,9 +16,7 @@ import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 
 @Composable
-fun LoadingComponent(
-    modifier: Modifier = Modifier
-) {
+fun LoadingComponent(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center,
@@ -39,9 +37,10 @@ fun LoadingComponent(
 fun LoadingComponentPreview() {
     BBTVAssignmentsTheme {
         LoadingComponent(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BackgroundColor)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(BackgroundColor),
         )
     }
 }

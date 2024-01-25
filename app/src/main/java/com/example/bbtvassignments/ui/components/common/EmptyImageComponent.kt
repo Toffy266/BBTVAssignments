@@ -9,7 +9,7 @@ import androidx.compose.ui.layout.ContentScale
 @Composable
 fun EmptyImageComponent(
     painter: Painter,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Image(
         painter = painter,

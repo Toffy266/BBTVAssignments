@@ -8,7 +8,7 @@ data class DramaModel(
     @SerializedName("data")
     val data: Data = Data(),
     @SerializedName("error")
-    val error: ErrorModel = ErrorModel(),
+    val error: ErrorDetail = ErrorDetail(),
 )
 
 data class Data(
@@ -34,15 +34,6 @@ data class Info(
     val dramas: List<Drama> = listOf(),
     @SerializedName("actor")
     val actor: List<Actor> = listOf(),
-)
-
-data class Actor(
-    @SerializedName("id")
-    val id: Long = 0,
-    @SerializedName("image_url")
-    val imageURL: String = "",
-    @SerializedName("actor_name")
-    val actorName: String = "",
 )
 
 data class Drama(

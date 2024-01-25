@@ -37,14 +37,15 @@ fun ImageHeaderComponent(
     if (imageURL.isNotEmpty()) {
         NotEmptyImageComponent(
             imageURL = imageURL,
-            modifier = modifier
+            modifier = modifier,
         )
     } else {
         EmptyImageComponent(
-            painter = painterResource(
-                id = R.drawable.recommend
-            ),
-            modifier = modifier
+            painter =
+                painterResource(
+                    id = R.drawable.recommend,
+                ),
+            modifier = modifier,
         )
     }
 }
@@ -56,22 +57,21 @@ fun TitleHeaderComponent(
 ) {
     var titleText = title
     if (title.isEmpty()) {
-        titleText = stringResource(
-            id = R.string.title
-        )
+        titleText =
+            stringResource(
+                id = R.string.title,
+            )
     }
     TitleComponent(
         title = titleText,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 @Composable
-fun RatingHeaderComponent(
-    modifier: Modifier = Modifier
-) {
+fun RatingHeaderComponent(modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier
+        modifier = modifier,
     ) {
         repeat(5) {
             Icon(
@@ -90,9 +90,10 @@ fun TypeHeaderComponent(
 ) {
     var typeText = type
     if (type.isEmpty()) {
-        typeText = stringResource(
-            id = R.string.type_preview
-        )
+        typeText =
+            stringResource(
+                id = R.string.type_preview,
+            )
     }
 
     Row(
@@ -121,31 +122,32 @@ fun HeaderComponent(
 ) {
     with(datas) {
         Row(
-            modifier = modifier
+            modifier = modifier,
         ) {
             // ---------------  Image  ---------------
             ImageHeaderComponent(
                 imageURL = imageURL,
-                modifier = Modifier
-                    .width(200.dp)
-                    .aspectRatio(2f / 3f)
+                modifier =
+                    Modifier
+                        .width(200.dp)
+                        .aspectRatio(2f / 3f),
             )
             Column(
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 8.dp),
             ) {
                 // ---------------  Title  ---------------
                 TitleHeaderComponent(
                     title = title,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
                 )
                 // ---------------  Rating  ---------------
                 RatingHeaderComponent(
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
                 )
                 // ---------------  Type  ---------------
                 TypeHeaderComponent(
                     type = type,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
                 )
             }
         }
@@ -159,10 +161,11 @@ fun HeaderComponentPreview() {
     BBTVAssignmentsTheme {
         HeaderComponent(
             datas = Datas(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }

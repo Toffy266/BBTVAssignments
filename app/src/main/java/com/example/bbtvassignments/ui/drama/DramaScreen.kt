@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,25 +31,46 @@ fun DramaScreen(
 ) {
     val viewModel: DramaViewModel = koinViewModel()
 
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getDrama()
+    }
+
     with(viewModel.response) {
         if (loading) {
-            LoadingComponent()
+            LoadingComponent(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(BackgroundColor),
+            )
         } else {
             if (success) {
                 DramaContent(
                     response = this,
-                    onClick = navController.navigate("drama_detail/${0}"),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(BackgroundColor)
+                    onClick = {
+                        navController.navigate(
+                            "drama_detail_screen/${0}",
+                        )
+                    },
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(BackgroundColor),
                 )
             } else {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(BackgroundColor),
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(BackgroundColor),
                 ) {
-                    ErrorComponent(error = error)
+                    ErrorComponent(
+                        error = error,
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .background(BackgroundColor),
+                    )
                 }
             }
         }
@@ -58,9 +80,9 @@ fun DramaScreen(
 @Composable
 fun DramaContent(
     response: DramaUiState,
-    onClick: Unit,
-    modifier: Modifier = Modifier
-){
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     with(response) {
         LazyColumn(
             modifier = modifier,
@@ -68,37 +90,42 @@ fun DramaContent(
             item {
                 BannerComponent(
                     banner = data.banner,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f / 1f)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f / 1f),
                 )
             }
             item {
                 RecommendDramaComponent(
                     recommendList = recommendList,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(BackgroundColor)
-                        .padding(8.dp),
-                    onClick = onClick
+                    onClick = { onClick },
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .background(BackgroundColor)
+                            .padding(8.dp),
                 )
             }
             item {
                 Top10DramaComponent(
                     top10List = top10List,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(BackgroundColor)
-                        .padding(8.dp),
-                    onClick = onClick,
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .background(BackgroundColor)
+                            .padding(8.dp),
+                    onClick = { onClick },
                 )
             }
             item {
                 ActorComponent(
                     actorList = actorList,
-                    modifier = Modifier
-                        .background(BackgroundColor)
-                        .padding(8.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .background(BackgroundColor)
+                            .padding(8.dp),
                 )
             }
         }
@@ -111,6 +138,7 @@ fun DramaContentPreview() {
     BBTVAssignmentsTheme {
         DramaContent(
             response = DramaUiState(),
-            onClick = Unit)
+            onClick = {},
+        )
     }
 }

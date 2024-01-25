@@ -16,9 +16,7 @@ import com.example.bbtvassignments.ui.theme.BackgroundColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarComponent(
-    onClick: Unit
-) {
+fun TopAppBarComponent(onClick: Boolean) {
     TopAppBar(
         title = {
             Text("")
@@ -34,10 +32,11 @@ fun TopAppBarComponent(
                 )
             }
         },
-        colors = TopAppBarDefaults
-            .smallTopAppBarColors(
-                containerColor = BackgroundColor,
-            ),
+        colors =
+            TopAppBarDefaults
+                .smallTopAppBarColors(
+                    containerColor = BackgroundColor,
+                ),
     )
 }
 
@@ -46,7 +45,7 @@ fun TopAppBarComponent(
 fun TopAppBarComponentPreview() {
     BBTVAssignmentsTheme {
         TopAppBarComponent(
-            onClick = Unit
+            onClick = false,
         )
     }
 }

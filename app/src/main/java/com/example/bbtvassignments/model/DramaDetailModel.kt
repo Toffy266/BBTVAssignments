@@ -8,7 +8,7 @@ data class DramaDetailModel(
     @SerializedName("data")
     val data: List<Datas> = listOf(),
     @SerializedName("error")
-    val error: ErrorModel = ErrorModel(),
+    val error: ErrorDetail = ErrorDetail(),
 )
 
 data class Datas(

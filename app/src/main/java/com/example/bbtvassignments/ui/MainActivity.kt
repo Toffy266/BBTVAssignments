@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
                                     },
                                 ),
                         ) {
-                            val dramaId = remember {
+                            val dramaId =
+                                remember {
                                     it.arguments?.getLong("dramaId")
                                 }
                             DramaDetailScreen(

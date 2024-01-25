@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun TitleComponent(
     title: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = title,

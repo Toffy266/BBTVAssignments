@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bbtvassignments.model.DramaDetailModel
-import com.example.bbtvassignments.model.ErrorModel
+import com.example.bbtvassignments.model.Datas
+import com.example.bbtvassignments.model.DramaDetailUiState
 import com.example.bbtvassignments.repository.MainRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -17,24 +17,34 @@ class DramaDetailViewModel(
     private val dramaId: Long,
     private val mainRepository: MainRepository,
 ) : ViewModel() {
-    var loading by mutableStateOf(false)
-        private set
-    var error by mutableStateOf(ErrorModel())
-        private set
-    var response by mutableStateOf(false)
+    var response by mutableStateOf(DramaDetailUiState())
         private set
 
     fun getDetail() {
+        response =
+            response.copy(
+                loading = true,
+            )
+
         viewModelScope.launch {
             try {
-                loading = true
-                val detail = mainRepository.repoDramaDetail()
-                if (detail.status == "success") {
+                val result = mainRepository.repoDramaDetail()
 
-
-                } else {
-
-                }
+                response =
+                    if (result.status == "success") {
+                        response.copy(
+                            success = true,
+                            detail =
+                                getDetailById(
+                                    dramaId = dramaId,
+                                    detail = result.data,
+                                ),
+                        )
+                    } else {
+                        response.copy(
+                            error = result.error,
+                        )
+                    }
             } catch (throwable: Throwable) {
                 when (throwable) {
                     is IOException -> {
@@ -51,24 +61,26 @@ class DramaDetailViewModel(
                         Timber.d(throwable.toString())
                     }
                 }
-            }
-            finally {
-                loading = false
+            } finally {
+                response =
+                    response.copy(
+                        loading = false,
+                    )
             }
         }
     }
 }
 
-//fun getDetailById(
-//    detail: DramaDetailModel,
-//    dramaId: Long,
-//): DetailByIdModel {
-//    var detailById = DetailByIdModel()
-//
-//    detail.data.forEach { it ->
-//        if (it.id == dramaId) {
-//            detailById = DetailByIdModel(true, it)
-//        }
-//    }
-//    return detailById
-//}
+fun getDetailById(
+    dramaId: Long,
+    detail: List<Datas>,
+): Datas {
+    var detailById: Datas = Datas()
+
+    detail.forEach { it ->
+        if (it.id == dramaId) {
+            detailById = it
+        }
+    }
+    return detailById
+}

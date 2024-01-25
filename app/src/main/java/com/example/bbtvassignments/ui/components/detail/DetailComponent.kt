@@ -26,9 +26,10 @@ fun SynopsisComponent(
 ) {
     var detail = synopsis
     if (synopsis.isEmpty()) {
-        detail = stringResource(
-            id = R.string.synopsis_preview
-        )
+        detail =
+            stringResource(
+                id = R.string.synopsis_preview,
+            )
     }
 
     Text(
@@ -37,7 +38,7 @@ fun SynopsisComponent(
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Normal,
         maxLines = 4,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
     )
 }
 
@@ -48,18 +49,19 @@ fun DetailComponent(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         // ---------------  Title  ---------------
         TitleComponent(
-            title = stringResource(
-                id = R.string.synopsis
-            )
+            title =
+                stringResource(
+                    id = R.string.synopsis,
+                ),
         )
         // ---------------  Detail  ---------------
         SynopsisComponent(
             synopsis = datas.synopsis,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
     }
 }
@@ -71,10 +73,11 @@ fun DetailComponentPreview() {
     BBTVAssignmentsTheme {
         DetailComponent(
             datas = Datas(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(BackgroundColor)
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColor)
+                    .padding(8.dp),
         )
     }
 }
