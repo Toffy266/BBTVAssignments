@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -36,12 +37,10 @@ import com.example.bbtvassignments.ui.theme.LightPurple
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DramaDetailScreen(
     dramaId: Long?,
     navController: NavController,
-    modifier: Modifier = Modifier,
 ) {
     val viewModel: DramaDetailViewModel = koinViewModel { parametersOf(dramaId) }
 
@@ -66,10 +65,10 @@ fun DramaDetailScreen(
                     DramaDetailContent(
                         detail = detail,
                         modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .background(BackgroundColor),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                            .background(BackgroundColor),
                     )
                 } else if (success) {
                     LottieAnimationComponent(
@@ -81,9 +80,9 @@ fun DramaDetailScreen(
                     ErrorComponent(
                         error = error,
                         modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .background(BackgroundColor),
+                        Modifier
+                            .fillMaxSize()
+                            .background(BackgroundColor),
                     )
                 }
             }
@@ -115,10 +114,10 @@ fun DramaDetailContent(
                 HeaderComponent(
                     datas = detail,
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .background(BackgroundColor)
-                            .padding(8.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .background(BackgroundColor)
+                        .padding(8.dp),
                 )
             }
             item {
@@ -176,19 +175,4 @@ fun DramaDetailContentPreview() {
                     .background(BackgroundColor),
         )
     }
-}
-
-@Preview
-@Composable
-fun ActorPreview() {
-    ActorComponent(
-        actorList =
-            listOf(
-                Actor(),
-            ),
-        modifier =
-            Modifier
-                .background(BackgroundColor)
-                .padding(8.dp),
-    )
 }

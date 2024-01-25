@@ -27,7 +27,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DramaScreen(
     navController: NavController,
-    modifier: Modifier = Modifier,
 ) {
     val viewModel: DramaViewModel = koinViewModel()
 
@@ -48,9 +47,7 @@ fun DramaScreen(
                 DramaContent(
                     response = this,
                     onClick = {
-                        navController.navigate(
-                            "drama_detail_screen/${0}",
-                        )
+                        navController.navigate("drama_detail_screen/${it}")
                     },
                     modifier =
                         Modifier
@@ -80,7 +77,7 @@ fun DramaScreen(
 @Composable
 fun DramaContent(
     response: DramaUiState,
-    onClick: () -> Unit,
+    onClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     with(response) {

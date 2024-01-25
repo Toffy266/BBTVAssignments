@@ -120,7 +120,7 @@ fun Top10DramaItemComponent(
 @Composable
 fun Top10DramaComponent(
     top10List: List<Drama>,
-    onClick: () -> Unit,
+    onClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -142,7 +142,9 @@ fun Top10DramaComponent(
                             .width(270.dp)
                             .aspectRatio(5f / 3f)
                             .padding(top = 8.dp, end = 8.dp)
-                            .clickable(onClick = onClick),
+                            .clickable{
+                                onClick(it.id)
+                            },
                 )
             }
         }

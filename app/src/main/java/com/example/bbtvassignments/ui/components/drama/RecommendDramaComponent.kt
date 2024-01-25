@@ -97,7 +97,7 @@ fun RecommendDramaItemComponent(
 @Composable
 fun RecommendDramaComponent(
     recommendList: List<Drama>,
-    onClick: () -> Unit,
+    onClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -119,7 +119,9 @@ fun RecommendDramaComponent(
                             .width(160.dp)
                             .aspectRatio(2f / 3f)
                             .padding(top = 8.dp, end = 8.dp)
-                            .clickable(onClick = onClick),
+                            .clickable{
+                                      onClick(it.id)
+                            },
                 )
             }
         }
