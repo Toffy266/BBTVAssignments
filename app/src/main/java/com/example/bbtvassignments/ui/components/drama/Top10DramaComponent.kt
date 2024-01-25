@@ -142,7 +142,7 @@ fun Top10DramaComponent(
                             .width(270.dp)
                             .aspectRatio(5f / 3f)
                             .padding(top = 8.dp, end = 8.dp)
-                            .clickable{
+                            .clickable {
                                 onClick(it.id)
                             },
                 )

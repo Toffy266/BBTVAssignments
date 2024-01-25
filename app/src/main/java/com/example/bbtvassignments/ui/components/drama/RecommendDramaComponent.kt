@@ -119,8 +119,8 @@ fun RecommendDramaComponent(
                             .width(160.dp)
                             .aspectRatio(2f / 3f)
                             .padding(top = 8.dp, end = 8.dp)
-                            .clickable{
-                                      onClick(it.id)
+                            .clickable {
+                                onClick(it.id)
                             },
                 )
             }

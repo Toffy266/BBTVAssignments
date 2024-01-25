@@ -90,7 +90,11 @@ fun ActorComponent(
         LazyRow {
             items(actorList) {
                 Column(
-                    modifier = Modifier.padding(top = 8.dp, end = 8.dp),
+                    modifier =
+                        Modifier.padding(
+                            top = 8.dp,
+                            end = 10.dp,
+                        ),
                 ) {
                     // ---------------  Image  ---------------
                     ImageActorDramaComponent(

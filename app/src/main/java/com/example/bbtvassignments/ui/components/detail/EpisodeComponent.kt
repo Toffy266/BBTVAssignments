@@ -96,28 +96,33 @@ fun EpisodeItemComponent(
     modifier: Modifier = Modifier,
 ) {
     with(episodeItem) {
-        Row(
+        Column(
             modifier = modifier,
         ) {
-            // ---------------  Image  ---------------
-            ImageEpisodeComponent(
-                imageURL = imageURL,
+            Row {
+                // ---------------  Image  ---------------
+                ImageEpisodeComponent(
+                    imageURL = imageURL,
+                    modifier =
+                        Modifier
+                            .width(220.dp)
+                            .aspectRatio(16f / 9f),
+                )
+                // ---------------  TextTitle  ---------------
+                TextTitleEpisodeDramaComponent(
+                    title = title,
+                    modifier = Modifier.padding(16.dp),
+                )
+            }
+            // ---------------  Detail  ---------------
+            DetailEpisodeDramaComponent(
+                detail = detail,
                 modifier =
                     Modifier
-                        .width(220.dp)
-                        .aspectRatio(16f / 9f),
-            )
-            // ---------------  TextTitle  ---------------
-            TextTitleEpisodeDramaComponent(
-                title = title,
-                modifier = Modifier.padding(16.dp),
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
             )
         }
-        // ---------------  Detail  ---------------
-        DetailEpisodeDramaComponent(
-            detail = detail,
-            modifier = Modifier.padding(top = 16.dp),
-        )
     }
 }
 
