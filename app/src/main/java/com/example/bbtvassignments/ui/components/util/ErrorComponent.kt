@@ -22,47 +22,52 @@ import com.example.bbtvassignments.ui.theme.BackgroundColor
 @Composable
 fun ErrorCodeComponent(
     code: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = code,
-        modifier.fillMaxWidth(),
+        modifier = modifier,
         style = MaterialTheme.typography.titleSmall,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
     )
 }
 
 @Composable
 fun ErrorMessageComponent(
     message: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = message,
-        modifier
-            .padding(top = 8.dp)
-            .fillMaxWidth(),
+        modifier = modifier,
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Normal,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
     )
 }
 
 @Composable
 fun ErrorComponent(
     error: ErrorDetail,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Box (
-        modifier
-            .fillMaxSize()
-            .background(BackgroundColor)
-            .padding(8.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column {
-            ErrorCodeComponent(code = error.code.toString())
-            ErrorMessageComponent(message = error.message)
+    with(error) {
+        Box(
+            modifier = modifier,
+            contentAlignment = Alignment.Center,
+        ) {
+            Column {
+                ErrorCodeComponent(
+                    code = code.toString(),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                ErrorMessageComponent(
+                    message = message,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }
@@ -74,8 +79,11 @@ fun ErrorComponentPreview() {
         ErrorComponent(
             error = ErrorDetail(
                 500,
-                "Server error!!!"
-            )
+                "Server error!!!",
+            ),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(BackgroundColor)
         )
     }
 }

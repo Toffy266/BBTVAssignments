@@ -2,28 +2,30 @@ package com.example.bbtvassignments.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DramaModel (
+data class DramaModel(
     @SerializedName("status")
     val status: String = "",
     @SerializedName("data")
-    val data: Data = Data()
+    val data: Data = Data(),
+    @SerializedName("error")
+    val error: ErrorModel = ErrorModel(),
 )
 
-data class Data (
+data class Data(
     @SerializedName("banner")
     val banner: Banner = Banner(),
     @SerializedName("infos")
-    val infos: List<Info> = listOf()
+    val infos: List<Info> = listOf(),
 )
 
-data class Banner (
+data class Banner(
     @SerializedName("image_url")
     val imageURL: String = "",
     @SerializedName("title")
-    val title: String = ""
+    val title: String = "",
 )
 
-data class Info (
+data class Info(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("category_title")
@@ -31,19 +33,19 @@ data class Info (
     @SerializedName("dramas")
     val dramas: List<Drama> = listOf(),
     @SerializedName("actor")
-    val actor: List<Actor> = listOf()
+    val actor: List<Actor> = listOf(),
 )
 
-data class Actor (
+data class Actor(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("image_url")
     val imageURL: String = "",
     @SerializedName("actor_name")
-    val actorName: String = ""
+    val actorName: String = "",
 )
 
-data class Drama (
+data class Drama(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("image_url")
@@ -51,5 +53,5 @@ data class Drama (
     @SerializedName("tag")
     val tag: String = "",
     @SerializedName("title")
-    val title: String = ""
+    val title: String = "",
 )

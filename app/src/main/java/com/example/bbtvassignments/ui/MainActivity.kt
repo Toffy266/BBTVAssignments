@@ -13,8 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.bbtvassignments.ui.detail.DramaDetail
-import com.example.bbtvassignments.ui.drama.Drama
+import com.example.bbtvassignments.ui.detail.DramaDetailScreen
+import com.example.bbtvassignments.ui.drama.DramaScreen
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,33 +22,35 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BBTVAssignmentsTheme {
-                Surface (
+                Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                    ) {
+                    color = MaterialTheme.colorScheme.background,
+                ) {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = "drama"
+                        startDestination = "drama_screen",
                     ) {
-                        composable("drama") {
-                            Drama(navController = navController)
+                        composable("drama_screen") {
+                            DramaScreen(navController = navController)
                         }
                         composable(
-                            "drama_detail/{dramaId}",
-                            arguments = listOf(
-                                navArgument("dramaId"
-                                ) {
-                                    type = NavType.LongType
-                                }
-                            )
+                            "drama_detail_screen/{dramaId}",
+                            arguments =
+                                listOf(
+                                    navArgument(
+                                        "dramaId",
+                                    ) {
+                                        type = NavType.LongType
+                                    },
+                                ),
                         ) {
                             val dramaId = remember {
-                                it.arguments?.getLong("dramaId")
-                            }
-                            DramaDetail(
+                                    it.arguments?.getLong("dramaId")
+                                }
+                            DramaDetailScreen(
                                 dramaId = dramaId,
-                                navController = navController
+                                navController = navController,
                             )
                         }
                     }

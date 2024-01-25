@@ -10,16 +10,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarComponent(
-    navController: NavController
+    onClick: Unit
 ) {
     TopAppBar(
         title = {
@@ -27,20 +25,18 @@ fun TopAppBarComponent(
         },
         navigationIcon = {
             IconButton(
-                onClick = {
-                    navController.navigate("drama")
-                }
+                onClick = { onClick },
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = null,
-                    tint = Color.White
+                    tint = Color.White,
                 )
             }
         },
         colors = TopAppBarDefaults
             .smallTopAppBarColors(
-                containerColor = BackgroundColor
+                containerColor = BackgroundColor,
             ),
     )
 }
@@ -50,7 +46,7 @@ fun TopAppBarComponent(
 fun TopAppBarComponentPreview() {
     BBTVAssignmentsTheme {
         TopAppBarComponent(
-            navController = NavController(LocalContext.current)
+            onClick = Unit
         )
     }
 }

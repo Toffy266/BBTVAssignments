@@ -6,6 +6,6 @@ import com.example.bbtvassignments.model.ErrorModel
 
 interface MainRepository {
     suspend fun repoDrama(): DramaModel
+
     suspend fun repoDramaDetail(): DramaDetailModel
-    suspend fun repoError(): ErrorModel
 }

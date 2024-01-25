@@ -24,24 +24,23 @@ fun LottieAnimationComponent(
     modifier: Modifier = Modifier
 ) {
     val rawComposition by rememberLottieComposition(
-        spec = LottieCompositionSpec.RawRes(
-            R.raw.animation_not_found
-        )
+        spec =
+            LottieCompositionSpec.RawRes(
+                R.raw.animation_not_found,
+            ),
     )
     val progress by animateLottieCompositionAsState(
         composition = rawComposition,
-        iterations = LottieConstants.IterateForever
+        iterations = LottieConstants.IterateForever,
     )
-    Box (
-        modifier
-            .fillMaxSize()
-            .background(BackgroundColor),
+    Box(
+        modifier = modifier,
         contentAlignment = Alignment.Center,
-    ){
+    ) {
         LottieAnimation(
             composition = rawComposition,
             progress = progress,
-            modifier.width(300.dp)
+            modifier = Modifier.width(300.dp),
         )
     }
 }
@@ -50,6 +49,10 @@ fun LottieAnimationComponent(
 @Composable
 fun LottieAnimationComponentPreview() {
     BBTVAssignmentsTheme {
-        LottieAnimationComponent()
+        LottieAnimationComponent(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(BackgroundColor)
+        )
     }
 }

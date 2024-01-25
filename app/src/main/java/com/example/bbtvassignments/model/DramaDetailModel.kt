@@ -2,14 +2,16 @@ package com.example.bbtvassignments.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DramaDetailModel (
+data class DramaDetailModel(
     @SerializedName("status")
     val status: String = "",
     @SerializedName("data")
-    val data: List<Datas> = listOf()
+    val data: List<Datas> = listOf(),
+    @SerializedName("error")
+    val error: ErrorModel = ErrorModel(),
 )
 
-data class Datas (
+data class Datas(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("image_url")
@@ -21,21 +23,12 @@ data class Datas (
     @SerializedName("synopsis")
     val synopsis: String = "",
     @SerializedName("actors")
-    val actors: List<Actors> = listOf(),
+    val actors: List<Actor> = listOf(),
     @SerializedName("episodes")
-    val episodes: List<Episode> = listOf()
+    val episodes: List<Episode> = listOf(),
 )
 
-data class Actors (
-    @SerializedName("id")
-    val id: Long = 0,
-    @SerializedName("image_url")
-    val imageURL: String = "",
-    @SerializedName("actor_name")
-    val actorName: String = ""
-)
-
-data class Episode (
+data class Episode(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("image_url")
@@ -43,5 +36,5 @@ data class Episode (
     @SerializedName("title")
     val title: String = "",
     @SerializedName("detail")
-    val detail: String = ""
+    val detail: String = "",
 )

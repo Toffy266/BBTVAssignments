@@ -1,6 +1,5 @@
 package com.example.bbtvassignments.ui.components.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,106 +13,39 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.bbtvassignments.R
 import com.example.bbtvassignments.model.Episode
+import com.example.bbtvassignments.ui.components.common.EmptyImageComponent
+import com.example.bbtvassignments.ui.components.common.NotEmptyImageComponent
+import com.example.bbtvassignments.ui.components.common.TitleComponent
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
-
-
-// ---------------  Title  ---------------
-@Composable
-fun TitleEpisodeDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = stringResource(id = R.string.all_episode),
-        style = MaterialTheme.typography.titleSmall
-    )
-}
-
-// ---------------  Image  ---------------
-@Composable
-fun NotEmptyImageEpisodeComponent(
-    imageURL: String,
-    modifier: Modifier = Modifier
-) {
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(imageURL)
-            .crossfade(true)
-            .build(),
-        contentDescription = null,
-        modifier
-            .width(220.dp)
-            .aspectRatio(16f / 9f),
-        contentScale = ContentScale.Crop
-    )
-}
-
-@Composable
-fun EmptyImageEpisodeComponent(
-    modifier: Modifier = Modifier
-) {
-    Image(
-        painter = painterResource(id = R.drawable.episode),
-        contentDescription = null,
-        modifier
-            .width(220.dp)
-            .aspectRatio(16f / 9f),
-        contentScale = ContentScale.Crop
-    )
-}
 
 @Composable
 fun ImageEpisodeComponent(
     imageURL: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    if(imageURL.isNotEmpty()) {
-        NotEmptyImageEpisodeComponent(imageURL = imageURL)
+    if (imageURL.isNotEmpty()) {
+        NotEmptyImageComponent(
+            imageURL = imageURL,
+            modifier = modifier
+
+        )
     } else {
-        EmptyImageEpisodeComponent()
+        EmptyImageComponent(
+            painter = painterResource(
+                id = R.drawable.episode
+            ),
+            modifier = modifier
+        )
     }
-}
-
-// ---------------  TextTitle  ---------------
-@Composable
-fun NotEmptyTextTitleEpisodeDramaComponent(
-    title: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = title,
-        modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        style = MaterialTheme.typography.titleSmall,
-        fontWeight = FontWeight.Normal
-    )
-}
-
-@Composable
-fun EmptyTextTitleEpisodeDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "ตอนที่ 1",
-        modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        style = MaterialTheme.typography.titleSmall,
-        fontWeight = FontWeight.Normal
-    )
 }
 
 @Composable
@@ -121,40 +53,17 @@ fun TextTitleEpisodeDramaComponent(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    if (title.isNotEmpty()) {
-        NotEmptyTextTitleEpisodeDramaComponent(title = title)
-    } else {
-        EmptyTextTitleEpisodeDramaComponent()
+    var textTitle = title
+    if (title.isEmpty()) {
+        textTitle = stringResource(
+            id = R.string.episode_preview
+        )
     }
-}
-
-// ---------------  Detail  ---------------
-@Composable
-fun NotEmptyDetailEpisodeDramaComponent(
-    detail: String,
-    modifier: Modifier = Modifier,
-) {
     Text(
-        text = detail,
-        modifier.padding(top = 16.dp),
-        style = MaterialTheme.typography.bodyLarge,
+        text = textTitle,
+        modifier = modifier,
+        style = MaterialTheme.typography.titleSmall,
         fontWeight = FontWeight.Normal,
-        maxLines = 4,
-        overflow = TextOverflow.Ellipsis,
-    )
-}
-
-@Composable
-fun EmptyDetailEpisodeDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "บลาๆๆๆๆๆ",
-        modifier.padding(top = 16.dp),
-        style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Normal,
-        maxLines = 4,
-        overflow = TextOverflow.Ellipsis,
     )
 }
 
@@ -163,46 +72,73 @@ fun DetailEpisodeDramaComponent(
     detail: String,
     modifier: Modifier = Modifier,
 ) {
-    if (detail.isNotEmpty()) {
-        NotEmptyDetailEpisodeDramaComponent(detail = detail)
-    } else {
-        EmptyDetailEpisodeDramaComponent()
+    var detailText = detail
+    if (detail.isEmpty()) {
+        detailText = stringResource(
+            id = R.string.detail_preview
+        )
     }
+    Text(
+        text = detailText,
+        modifier = modifier,
+        style = MaterialTheme.typography.displaySmall,
+        fontWeight = FontWeight.Normal,
+        maxLines = 4,
+        overflow = TextOverflow.Ellipsis,
+    )
 }
 
-// ---------------  EpisodeItem  ---------------
 @Composable
 fun EpisodeItemComponent(
     episodeItem: Episode,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     with(episodeItem) {
-        Row {
-            ImageEpisodeComponent(imageURL = imageURL)
-            TextTitleEpisodeDramaComponent(title = title)
+        Row (
+            modifier = modifier
+        ) {
+            // ---------------  Image  ---------------
+            ImageEpisodeComponent(
+                imageURL = imageURL,
+                modifier = Modifier
+                    .width(220.dp)
+                    .aspectRatio(16f / 9f),
+            )
+            // ---------------  TextTitle  ---------------
+            TextTitleEpisodeDramaComponent(
+                title = title,
+                modifier = Modifier.padding(16.dp)
+            )
         }
-        DetailEpisodeDramaComponent(detail = detail)
+        // ---------------  Detail  ---------------
+        DetailEpisodeDramaComponent(
+            detail = detail,
+            modifier = Modifier.padding(top = 16.dp)
+        )
     }
 }
 
-// ---------------  Episode  ---------------
+// ---------------  Component  ---------------
 @Composable
 fun EpisodeComponent(
     episode: List<Episode>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Column (
-        modifier
-            .fillMaxWidth()
-            .background(BackgroundColor)
-            .padding(8.dp)
+    Column(modifier = modifier,
     ) {
-        TitleEpisodeDramaComponent()
-        LazyColumn (
-            modifier.padding(top = 8.dp)
-        ) {
+        // ---------------  Title  ---------------
+        TitleComponent(
+            title = stringResource(
+                id = R.string.all_episode
+            )
+        )
+        LazyColumn {
             items(episode) {
-                EpisodeItemComponent(episodeItem = it)
+                // ---------------  EpisodeItem  ---------------
+                EpisodeItemComponent(
+                    episodeItem = it,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         }
     }
@@ -217,7 +153,11 @@ fun EpisodeComponentPreview() {
             episode = listOf(
                 Episode(),
                 Episode()
-            )
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(BackgroundColor)
+                .padding(8.dp)
         )
     }
 }

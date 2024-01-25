@@ -2,16 +2,16 @@ package com.example.bbtvassignments.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorModel (
+data class ErrorModel(
     @SerializedName("status")
     val status: String = "",
     @SerializedName("error")
-    val error: ErrorDetail = ErrorDetail()
+    val detail: ErrorDetail = ErrorDetail(),
 )
 
-data class ErrorDetail (
+data class ErrorDetail(
     @SerializedName("code")
     val code: Long = 0,
     @SerializedName("message")
-    val message: String = ""
+    val message: String = "",
 )

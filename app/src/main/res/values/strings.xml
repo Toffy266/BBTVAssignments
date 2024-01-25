@@ -5,6 +5,7 @@
     <string name="recommend">ละครแนะนำ</string>
     <string name="top10">10 อันดับละครดัง กำลังมาแรง</string>
     <string name="actor">นักแสดง</string>
+    <string name="tag">ตอนใหม่</string>
 
     <!-- Drama Detail -->
     <string name="type">ประเภท:</string>
@@ -16,9 +17,10 @@
     <string name="fetch_drama_detail_data_error">Fetch Drama Detail Data Error</string>
 
     <!-- Preview -->
-    <string name="title">Title</string>
-    <string name="tag">ตอนใหม่</string>
+    <string name="title">แม่โขง</string>
+    <string name="type_preview">แอ็กชั่น</string>
+    <string name="actor_preview">พิ้งค์พลอย ปภาวดี</string>
     <string name="synopsis_preview">การผจญภัยครั้งสำคัญ สู่เส้นทางที่พวกเขาไม่อาจหลีกหนี !</string>
-    <string name="episode">ตอนที่ 1</string>
-    <string name="detail">เดฟ และ ดราโก้ บลาๆๆๆๆ</string>
+    <string name="episode_preview">ตอนที่ 1</string>
+    <string name="detail_preview">เดฟ และ ดราโก้ บลาๆๆๆๆ</string>
 </resources>

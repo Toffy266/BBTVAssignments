@@ -1,6 +1,5 @@
 package com.example.bbtvassignments.ui.components.drama
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,61 +16,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.bbtvassignments.R
 import com.example.bbtvassignments.model.Drama
+import com.example.bbtvassignments.ui.components.common.EmptyImageComponent
+import com.example.bbtvassignments.ui.components.common.NotEmptyImageComponent
+import com.example.bbtvassignments.ui.components.common.TitleComponent
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 import com.example.bbtvassignments.ui.theme.YellowColor
-
-// ---------------  Title  ---------------
-@Composable
-fun TitleRecommendDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = stringResource(id = R.string.recommend),
-        style = MaterialTheme.typography.titleSmall
-    )
-}
-
-// ---------------  Image  ---------------
-@Composable
-fun NotEmptyImageRecommendDramaComponent(
-    imageURL: String,
-    modifier: Modifier = Modifier,
-) {
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(imageURL)
-            .crossfade(true)
-            .build(),
-        contentDescription = null,
-        modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop
-    )
-}
-
-@Composable
-fun EmptyImageRecommendDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Image(
-        painter = painterResource(id = R.drawable.recommend),
-        contentDescription =null,
-        contentScale = ContentScale.Crop,
-    )
-}
 
 @Composable
 fun ImageRecommendDramaComponent(
@@ -79,63 +36,88 @@ fun ImageRecommendDramaComponent(
     modifier: Modifier = Modifier,
 ) {
     if (imageURL.isNotEmpty()) {
-        NotEmptyImageRecommendDramaComponent(imageURL = imageURL)
+        NotEmptyImageComponent(
+            imageURL = imageURL,
+            modifier = modifier
+        )
     } else {
-        EmptyImageRecommendDramaComponent()
+        EmptyImageComponent(
+            painter = painterResource(
+                id = R.drawable.recommend
+            )
+        )
     }
 }
 
-// ---------------  Tag  ---------------
 @Composable
 fun EpisodeTagRecommendDramaComponent(
     tag: String,
     modifier: Modifier = Modifier,
 ) {
-    Surface (
-        modifier.padding(8.dp),
+    Surface(
+        modifier = modifier,
         color = YellowColor,
-        shape = RoundedCornerShape(4.dp),
+        shape = RoundedCornerShape(4.dp)
     ) {
-        if(tag.isNotEmpty()) {
+        if (tag.isNotEmpty()) {
             Text(
                 text = tag,
-                modifier.padding(6.dp, 4.dp),
-                style = MaterialTheme.typography.labelSmall
+                modifier = Modifier.padding(6.dp, 4.dp),
+                style = MaterialTheme.typography.labelSmall,
             )
         }
     }
 }
 
-// ---------------  RecommendDrama  ---------------
+@Composable
+fun RecommendDramaItemComponent(
+    drama: Drama,
+    modifier: Modifier = Modifier,
+) {
+    with(drama) {
+        Box(
+            modifier = modifier
+        ) {
+            // ---------------  Image  ---------------
+            ImageRecommendDramaComponent(
+                imageURL = imageURL,
+                modifier = Modifier.fillMaxSize()
+            )
+            // ---------------  Tag  ---------------
+            EpisodeTagRecommendDramaComponent(
+                tag = tag,
+                modifier = Modifier.padding(8.dp),
+            )
+        }
+    }
+}
+
+// ---------------  Component  ---------------
 @Composable
 fun RecommendDramaComponent(
     recommendList: List<Drama>,
-    navController: NavController,
+    onClick: Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column (
-        modifier
-            .fillMaxWidth()
-            .background(BackgroundColor)
-            .padding(8.dp)
+    Column(
+        modifier = modifier,
     ) {
-        TitleRecommendDramaComponent()
+        // ---------------  Title  ---------------
+        TitleComponent(
+            title = stringResource(
+                id = R.string.recommend
+            )
+        )
         LazyRow {
             items(recommendList) {
-                Box (
-                    modifier
+                RecommendDramaItemComponent(
+                    drama = it,
+                    modifier = Modifier
                         .width(160.dp)
                         .aspectRatio(2f / 3f)
                         .padding(top = 8.dp, end = 8.dp)
-                        .clickable(onClick = {
-                            navController.navigate("drama_detail/${it.id}")
-                        })
-                ) {
-                    ImageRecommendDramaComponent(imageURL = it.imageURL)
-                    Column (modifier.align(Alignment.TopStart)) {
-                        EpisodeTagRecommendDramaComponent(tag = it.tag)
-                    }
-                }
+                        .clickable( onClick = { onClick })
+                )
             }
         }
     }
@@ -147,14 +129,19 @@ fun RecommendDramaComponent(
 fun RecommendDramaComponentPreview() {
     BBTVAssignmentsTheme {
         RecommendDramaComponent(
-            recommendList = listOf<Drama>(
-                Drama(
-                    tag = stringResource(id = R.string.tag)
+            recommendList =
+                listOf<Drama>(
+                    Drama(
+                        tag = stringResource(id = R.string.tag),
+                    ),
+                    Drama(),
+                    Drama(),
                 ),
-                Drama(),
-                Drama(),
-            ),
-            navController = NavController(LocalContext.current)
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(BackgroundColor)
+                .padding(8.dp),
+            onClick = Unit
         )
     }
 }

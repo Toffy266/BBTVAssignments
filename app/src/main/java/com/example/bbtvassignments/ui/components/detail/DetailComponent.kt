@@ -10,77 +10,57 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bbtvassignments.R
 import com.example.bbtvassignments.model.Datas
+import com.example.bbtvassignments.ui.components.common.TitleComponent
 import com.example.bbtvassignments.ui.theme.BBTVAssignmentsTheme
 import com.example.bbtvassignments.ui.theme.BackgroundColor
 
-
-// ---------------  Title  ---------------
 @Composable
-fun TitleDetailDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = stringResource(id = R.string.synopsis),
-        style = MaterialTheme.typography.titleSmall
-    )
-}
-
-// ---------------  Detail  ---------------
-@Composable
-fun NotEmptySynopsisDetailDramaComponent(
+fun SynopsisComponent(
     synopsis: String,
     modifier: Modifier = Modifier,
 ) {
-    Text(
-        text = synopsis,
-        modifier.padding(top = 8.dp),
-        style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Normal
-    )
-}
-
-@Composable
-fun EmptySynopsisDetailDramaComponent(
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = stringResource(id = R.string.synopsis_preview),
-        modifier.padding(top = 8.dp),
-        style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Normal
-    )
-}
-
-@Composable
-fun SynopsisDetailDramaComponent(
-    synopsis: String,
-    modifier: Modifier = Modifier,
-) {
-    if (synopsis.isNotEmpty()) {
-        NotEmptySynopsisDetailDramaComponent(synopsis = synopsis)
-    } else {
-        EmptySynopsisDetailDramaComponent()
+    var detail = synopsis
+    if (synopsis.isEmpty()) {
+        detail = stringResource(
+            id = R.string.synopsis_preview
+        )
     }
+
+    Text(
+        text = detail,
+        modifier = modifier,
+        style = MaterialTheme.typography.bodyLarge,
+        fontWeight = FontWeight.Normal,
+        maxLines = 4,
+        overflow = TextOverflow.Ellipsis
+    )
 }
 
-// ---------------  DetailComponent  ---------------
+// ---------------  Component  ---------------
 @Composable
 fun DetailComponent(
     datas: Datas,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Column (
-        modifier
-            .fillMaxWidth()
-            .background(BackgroundColor)
-            .padding(8.dp)
+    Column(
+        modifier = modifier
     ) {
-        TitleDetailDramaComponent()
-        SynopsisDetailDramaComponent(synopsis = datas.synopsis)
+        // ---------------  Title  ---------------
+        TitleComponent(
+            title = stringResource(
+                id = R.string.synopsis
+            )
+        )
+        // ---------------  Detail  ---------------
+        SynopsisComponent(
+            synopsis = datas.synopsis,
+            modifier = Modifier.padding(top = 8.dp)
+        )
     }
 }
 
@@ -90,7 +70,11 @@ fun DetailComponent(
 fun DetailComponentPreview() {
     BBTVAssignmentsTheme {
         DetailComponent(
-            Datas()
+            datas = Datas(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(BackgroundColor)
+                .padding(8.dp)
         )
     }
 }

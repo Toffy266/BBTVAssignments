@@ -20,14 +20,12 @@ fun LoadingComponent(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier
-            .fillMaxSize()
-            .background(BackgroundColor),
-        contentAlignment = Alignment.Center
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
     ) {
         Column {
             CircularProgressIndicator(
-                modifier.width(128.dp),
+                modifier = Modifier.width(128.dp),
                 strokeWidth = 10.dp,
                 color = MaterialTheme.colorScheme.secondary,
                 trackColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -40,6 +38,10 @@ fun LoadingComponent(
 @Composable
 fun LoadingComponentPreview() {
     BBTVAssignmentsTheme {
-        LoadingComponent()
+        LoadingComponent(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(BackgroundColor)
+        )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bbtvassignments.ui.drama
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,49 +9,55 @@ import androidx.lifecycle.viewModelScope
 import com.example.bbtvassignments.model.Actor
 import com.example.bbtvassignments.model.Drama
 import com.example.bbtvassignments.model.DramaModel
+import com.example.bbtvassignments.model.DramaUiState
 import com.example.bbtvassignments.model.ErrorModel
 import com.example.bbtvassignments.repository.MainRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
 
 class DramaViewModel(
-    private val mainRepository: MainRepository
+    private val mainRepository: MainRepository,
 ) : ViewModel() {
-
-    var loading by mutableStateOf(false)
-        private set
-    var drama by mutableStateOf(DramaModel())
-        private set
-    var recommendList by mutableStateOf(listOf(Drama()))
-        private set
-    var top10List by mutableStateOf(listOf(Drama()))
-        private set
-    var actorList by mutableStateOf(listOf(Actor()))
-        private set
-    var error by mutableStateOf(ErrorModel())
-        private set
-    var response by mutableStateOf(false)
+    var response by mutableStateOf(DramaUiState())
         private set
 
-    init {
+    fun getDrama() {
         viewModelScope.launch {
-            try {
-                loading = true
-                drama = mainRepository.repoDrama()
-
-                if(drama.status ==  "success") {
-                    recommendList = getRecommendList(drama)
-                    top10List = getTop10List(drama)
-                    actorList = getActorList(drama)
-                    response = true
-                } else {
-                    error = mainRepository.repoError()
+            with(response) {
+                try {
+                    val result = mainRepository.repoDrama()
+                    loading = true
+                    if (result.status == "success") {
+                        success = true
+                        data = result.data
+                        recommendList = getRecommendList(result)
+                        top10List = getTop10List(result)
+                        actorList = getActorList(result)
+                    } else {
+                        error = result.error.detail
+                    }
                 }
-
-            } catch (e: Exception) {
-                Timber.d(e.message.toString())
-            } finally {
-                loading = false
+                catch (throwable: Throwable) {
+                    when (throwable) {
+                        is IOException -> {
+                            Timber.d("Network Error")
+                        }
+                        is HttpException -> {
+                            val codeError = throwable.code()
+                            val errorMessageResponse = throwable.message()
+                            Timber.d("Error $errorMessageResponse : $codeError")
+                        }
+                        else -> {
+                            Timber.d(throwable.toString())
+                        }
+                    }
+                }
+                finally {
+                    loading = false
+                }
             }
         }
     }
