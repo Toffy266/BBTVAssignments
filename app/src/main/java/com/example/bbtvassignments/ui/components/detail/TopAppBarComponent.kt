@@ -16,14 +16,16 @@ import com.example.bbtvassignments.ui.theme.BackgroundColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarComponent(onClick: Boolean) {
+fun TopAppBarComponent(
+    onClick: () -> Unit
+) {
     TopAppBar(
         title = {
             Text("")
         },
         navigationIcon = {
             IconButton(
-                onClick = { onClick },
+                onClick = onClick,
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
@@ -45,7 +47,7 @@ fun TopAppBarComponent(onClick: Boolean) {
 fun TopAppBarComponentPreview() {
     BBTVAssignmentsTheme {
         TopAppBarComponent(
-            onClick = false,
+            onClick = {  },
         )
     }
 }
