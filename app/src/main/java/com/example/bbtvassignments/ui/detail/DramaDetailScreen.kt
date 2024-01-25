@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -20,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.bbtvassignments.R
-import com.example.bbtvassignments.model.Actor
 import com.example.bbtvassignments.model.Datas
 import com.example.bbtvassignments.ui.components.ActorComponent
 import com.example.bbtvassignments.ui.components.common.TitleComponent
@@ -37,6 +35,7 @@ import com.example.bbtvassignments.ui.theme.LightPurple
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DramaDetailScreen(
     dramaId: Long?,
@@ -57,7 +56,7 @@ fun DramaDetailScreen(
                 containerColor = BackgroundColor,
                 topBar = {
                     TopAppBarComponent(
-                        onClick = navController.popBackStack(),
+                        onClick = { navController.popBackStack() },
                     )
                 },
             ) { innerPadding ->
@@ -65,24 +64,25 @@ fun DramaDetailScreen(
                     DramaDetailContent(
                         detail = detail,
                         modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                            .background(BackgroundColor),
+                            Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
+                                .background(BackgroundColor),
                     )
                 } else if (success) {
                     LottieAnimationComponent(
                         modifier =
                             Modifier
+                                .fillMaxSize()
                                 .background(BackgroundColor),
                     )
                 } else {
                     ErrorComponent(
                         error = error,
                         modifier =
-                        Modifier
-                            .fillMaxSize()
-                            .background(BackgroundColor),
+                            Modifier
+                                .fillMaxSize()
+                                .background(BackgroundColor),
                     )
                 }
             }
@@ -114,10 +114,13 @@ fun DramaDetailContent(
                 HeaderComponent(
                     datas = detail,
                     modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .background(BackgroundColor)
-                        .padding(8.dp),
+                        Modifier
+                            .fillMaxWidth()
+                            .background(BackgroundColor)
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                            ),
                 )
             }
             item {
@@ -127,7 +130,10 @@ fun DramaDetailContent(
                         Modifier
                             .fillMaxWidth()
                             .background(BackgroundColor)
-                            .padding(8.dp),
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                            ),
                 )
             }
             item {
@@ -136,7 +142,10 @@ fun DramaDetailContent(
                     modifier =
                         Modifier
                             .background(BackgroundColor)
-                            .padding(8.dp),
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                            ),
                 )
             }
             item {
@@ -147,7 +156,10 @@ fun DramaDetailContent(
                     modifier =
                         Modifier
                             .background(BackgroundColor)
-                            .padding(8.dp),
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                            ),
                 )
             }
             items(episodes) {
@@ -156,7 +168,10 @@ fun DramaDetailContent(
                     modifier =
                         Modifier
                             .background(BackgroundColor)
-                            .padding(8.dp),
+                            .padding(
+                                start = 8.dp,
+                                end = 8.dp,
+                            ),
                 )
             }
         }

@@ -50,13 +50,11 @@ class DramaDetailViewModel(
                     is IOException -> {
                         Timber.d("Network Error")
                     }
-
                     is HttpException -> {
                         val codeError = throwable.code()
                         val errorMessageResponse = throwable.message()
                         Timber.d("Error $errorMessageResponse : $codeError")
                     }
-
                     else -> {
                         Timber.d(throwable.toString())
                     }
@@ -75,7 +73,7 @@ fun getDetailById(
     dramaId: Long,
     detail: List<Datas>,
 ): Datas {
-    var detailById: Datas = Datas()
+    var detailById = Datas()
 
     detail.forEach { it ->
         if (it.id == dramaId) {
