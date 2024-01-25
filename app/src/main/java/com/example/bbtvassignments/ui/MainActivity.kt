@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
                         composable("drama_screen") {
                             DramaScreen(navController = navController)
                         }
+
                         composable(
                             "drama_detail_screen/{dramaId}",
                             arguments =

@@ -25,9 +25,7 @@ import com.example.bbtvassignments.ui.theme.BackgroundColor
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DramaScreen(
-    navController: NavController,
-) {
+fun DramaScreen(navController: NavController) {
     val viewModel: DramaViewModel = koinViewModel()
 
     LaunchedEffect(key1 = Unit) {
@@ -47,7 +45,8 @@ fun DramaScreen(
                 DramaContent(
                     response = this,
                     onClick = {
-                        navController.navigate("drama_detail_screen/${it}")
+                        navController.navigate("drama_detail_screen/$it")
+//                        navController.navigate("test_screen/$it")
                     },
                     modifier =
                         Modifier
@@ -96,7 +95,7 @@ fun DramaContent(
             item {
                 RecommendDramaComponent(
                     recommendList = recommendList,
-                    onClick = { onClick },
+                    onClick = onClick,
                     modifier =
                         Modifier
                             .fillMaxWidth()
@@ -112,7 +111,7 @@ fun DramaContent(
                             .fillMaxWidth()
                             .background(BackgroundColor)
                             .padding(8.dp),
-                    onClick = { onClick },
+                    onClick = onClick,
                 )
             }
             item {
