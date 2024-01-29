@@ -60,7 +60,7 @@ fun DramaDetailScreen(
                     )
                 },
             ) { innerPadding ->
-                if (success && (detail != null)) {
+                if (success && (detail != Datas())) {
                     DramaDetailContent(
                         detail = detail,
                         modifier =
