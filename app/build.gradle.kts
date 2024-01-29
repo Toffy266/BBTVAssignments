@@ -70,41 +70,38 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.0")
 
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
 
-    // Recyclerview
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-
-    // Navigation Component
+    // Navigation
+    // A framework for navigating between 'destinations' within an Android application
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
     // Retrofit for API
+    // A type-safe REST client which aims to make it easier to consume RESTful web services.
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Coroutines
+    // A concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Koin
+    // A framework to help you build any kind of Kotlin & Kotlin Multiplatform application
     implementation("io.insert-koin:koin-android:3.5.3")
     implementation("io.insert-koin:koin-androidx-compose:3.5.3")
 
-    // Timber
-    implementation("com.jakewharton.timber:timber:4.7.1")
-
-    // Coil for Image
+    // Coil
+    // Image Loading Library
     implementation("io.coil-kt:coil:2.5.0")
     implementation("io.coil-kt:coil-compose:2.5.0")
-
-    // pager
-    implementation("com.google.accompanist:accompanist-pager:0.12.0")
 
     // Lottie
     implementation("com.airbnb.android:lottie-compose:6.3.0")
 
-    // Pull to Refresh
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    // Timber
+    implementation("com.jakewharton.timber:timber:4.7.1")
 }
